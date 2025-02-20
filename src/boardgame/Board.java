@@ -38,7 +38,7 @@ public class Board {
 	}
 	
 	public void placePiece(Piece piece, Position pos) {
-		if (!thereIsAPiece(pos)) {
+		if (thereIsAPiece(pos)) {
 			throw new BoardException("There is already a piece on position " + pos);
 		}
 		pieces[pos.getRow()][pos.getCollumn()] = piece;
