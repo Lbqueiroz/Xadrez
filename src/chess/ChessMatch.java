@@ -24,21 +24,24 @@ public class ChessMatch {
 		}
 		return mat;
 	}
-	
+
 	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
 		Position source = sourcePosition.toPosition();
 		Position target = targetPosition.toPosition();
 		ValidateSourcePosition(source);
-		Piece capturedPiece = makeMove(source,target);
-		return (ChessPiece)capturedPiece;
+		Piece capturedPiece = makeMove(source, target);
+		return (ChessPiece) capturedPiece;
 	}
-	
+
 	private void ValidateSourcePosition(Position pos) {
-		if(!board.thereIsAPiece(pos)) {
+		if (!board.thereIsAPiece(pos)) {
+			throw new ChessException("There is no piece on source position");
+		}
+		if (!board.piece(pos).isThereAnyPossibleMove()) {
 			throw new ChessException("There is no piece on source position");
 		}
 	}
-	
+
 	private Piece makeMove(Position source, Position target) {
 		Piece p = board.removePiece(source);
 		Piece capturedPiece = board.removePiece(target);
